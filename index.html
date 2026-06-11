@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Billi Speech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #FFFFFF;
+      --sage: #7A9E87;
+      --sage-light: #EAF2EC;
+      --blush: #E8C5B0;
+      --text-dark: #2C2C2C;
+      --text-mid: #5A5A5A;
+      --text-light: #8A8A8A;
+      --border: #E8E0D5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--sage); }
+
+    /* HERO */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.4rem;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-mid);
+      max-width: 520px;
+      margin: 0 auto 2.4rem;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--sage);
+      color: white;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn:hover { background: #6a8e77; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--sage);
+      color: var(--sage);
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover { background: var(--sage-light); transform: translateY(-1px); }
+
+    /* BLUSH DIVIDER */
+    .wave-divider {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--blush), var(--sage), var(--blush));
+      opacity: 0.4;
+    }
+
+    /* ABOUT */
+    .about {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img {
+      background: var(--sage-light);
+      border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blush);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .about h2 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 1.2rem;
+    }
+
+    .about p {
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    /* SERVICES */
+    .services {
+      background: var(--warm-white);
+      padding: 6rem 2rem;
+    }
+
+    .services-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .services-header h2 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .services-header p {
+      color: var(--text-mid);
+      font-weight: 300;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* CONTACT */
+    .contact {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact p {
+      color: var(--text-mid);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--sage); }
+
+    .contact-form textarea { height: 140px; resize: vertical; }
+
+    .contact-form button {
+      background: var(--sage);
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .contact-form button:hover { background: #6a8e77; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-img { max-width: 220px; margin: 0 auto; }
+      .nav-links { display: none; }
+      .btn-outline { margin-left: 0; margin-top: 0.8rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Billi Speech</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Speech-Language Pathology</p>
+    <h1>Helping little voices <em>find their way</em></h1>
+    <p class="hero-sub">Specialist in feeding & early language skills — compassionate, play-based therapy for children and families.</p>
+    <a href="#contact" class="btn">Get in touch</a>
+    <a href="#services" class="btn btn-outline">Learn more</a>
+  </section>
+
+  <div class="wave-divider"></div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-img">🌿</div>
+    <div>
+      <p class="section-label">About</p>
+      <h2>Hi, I'm Billi — your partner in communication.</h2>
+      <p>I'm a licensed Speech-Language Pathologist with a passion for feeding therapy and early language development. I believe every child deserves a voice, and every family deserves support.</p>
+      <p>My approach is warm, play-based, and family-centered — because the best therapy happens when kids feel safe and seen.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="services-header">
+        <p class="section-label">What I offer</p>
+        <h2>Services</h2>
+        <p>Tailored support for your child's unique journey.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🍼</div>
+          <h3>Feeding therapy</h3>
+          <p>Support for picky eaters, texture aversions, and feeding challenges from infancy through early childhood.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💬</div>
+          <h3>Early language</h3>
+          <p>Building first words, expanding vocabulary, and supporting communication milestones in toddlers and young children.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👨‍👩‍👧</div>
+          <h3>Parent coaching</h3>
+          <p>Practical strategies and guidance so you can support your child's development between sessions.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Evaluations</h3>
+          <p>Comprehensive speech and language assessments with clear, actionable recommendations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">Let's connect</p>
+    <h2>Ready to get started?</h2>
+    <p>Reach out to schedule a free 15-minute consultation. I'd love to hear about your child and how I can help.</p>
+    <form class="contact-form">
+      <input type="text" placeholder="Your name" aria-label="Your name" />
+      <input type="email" placeholder="Email address" aria-label="Email address" />
+      <input type="tel" placeholder="Phone number (optional)" aria-label="Phone number" />
+      <textarea placeholder="Tell me a little about your child and what you're looking for..." aria-label="Message"></textarea>
+      <button type="submit">Send message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Billi Speech · Speech-Language Pathology · Made with 💚</p>
+  </footer>
+
+</body>
+</html>
