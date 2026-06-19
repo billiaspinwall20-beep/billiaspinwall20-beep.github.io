@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
-import noodleAsset from "@/assets/mac-cheese-logo.png.asset.json";
 import billiAsset from "@/assets/billi.jpeg.asset.json";
+import macLogo from "@/assets/mac_logo.png";
 import { ArrowRight, HelpCircle, Plus, Minus, CheckCircle2, MessageCircle, Utensils } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -53,10 +53,9 @@ function Index() {
       {/* Hero — full viewport height on desktop */}
       <section className="mx-auto max-w-5xl px-6 md:min-h-[calc(100vh-4rem)] flex flex-col justify-center pt-8 pb-16 text-center">
         <img
-          src={noodleAsset.url}
-          alt=""
-          aria-hidden="true"
-          className="mx-auto w-14 md:w-16 h-auto select-none pointer-events-none"
+          src={macLogo}
+          alt="Mac & Cheese — Speech & Feeding Therapy logo"
+          className="mx-auto w-28 md:w-36 h-auto select-none pointer-events-none"
         />
 
         <h1 className="mt-8 flex flex-col items-center leading-none">
