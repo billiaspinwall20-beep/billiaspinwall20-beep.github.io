@@ -1,0 +1,13 @@
+# Netlify build config for the TanStack Start (SSR) app living in a subfolder.
+# Netlify reads this from the repo root, then `base` switches into the app dir.
+[build]
+  base = "Mac & Cheese Therapy"
+  command = "bun install && bun run build"
+  # Publish dir is relative to `base` -> "Mac & Cheese Therapy/dist"
+  publish = "dist"
+
+[build.environment]
+  # App requires Node 20.19+ / 22.12+ (uses require() of ESM).
+  NODE_VERSION = "22"
+  # Make the SSR adapter explicit (Nitro also auto-detects Netlify).
+  NITRO_PRESET = "netlify"
