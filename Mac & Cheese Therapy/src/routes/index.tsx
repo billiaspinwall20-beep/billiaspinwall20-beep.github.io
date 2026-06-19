@@ -55,7 +55,7 @@ function Index() {
         <img
           src={macLogo}
           alt="Mac & Cheese — Speech & Feeding Therapy logo"
-          className="mx-auto w-28 md:w-36 h-auto select-none pointer-events-none"
+          className="mx-auto w-20 md:w-24 h-auto select-none pointer-events-none"
         />
 
         <h1 className="mt-8 flex flex-col items-center leading-none">
