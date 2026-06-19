@@ -59,17 +59,49 @@ function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`New interest form from ${form.parentName}`);
-    const concernsList = form.concerns.join(", ") + (form.otherConcern ? `, Other: ${form.otherConcern}` : "");
-    const daysList = form.preferredDays.join(", ") || "Not selected";
-    const bestContactList = form.bestContact.join(", ") || "Not selected";
-    const body = encodeURIComponent(
-      `Parent/Guardian Name: ${form.parentName}\nEmail: ${form.email}\nPhone: ${form.phone || "Not provided"}\nBest way to contact: ${bestContactList}\n\nChild's Name: ${form.childName || "Not provided"}\nChild's Age: ${form.childAge}\n\nAreas of Concern: ${concernsList}\n\nDescription:\n${form.description}\n\nPreferred Days:\n${daysList}\n\nLocation:\n${form.location || "Not provided"}`
-    );
-    window.location.href = `mailto:billiaspinwall20@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const res = await fetch(
+        `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_AIRTABLE_TABLE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fields: {
+              "Parent Name": form.parentName,
+              "Email": form.email,
+              "Phone": form.phone || undefined,
+              "Best Way to Contact": form.bestContact,
+              "Child Name": form.childName || undefined,
+              "Child Age": form.childAge,
+              "Areas of Concern": form.concerns,
+              "Other Concern": form.otherConcern || undefined,
+              "Description": form.description,
+              "Preferred Days": form.preferredDays,
+              "Location": form.location || undefined,
+              "Submitted At": new Date().toISOString(),
+            },
+          }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Submission failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const concernOptions = [
@@ -260,11 +292,15 @@ function Contact() {
               />
             </div>
 
+            {submitError && (
+              <p className="text-sm text-red-600">{submitError}</p>
+            )}
             <button
               type="submit"
-              className="inline-flex items-center rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-pop hover:bg-plum-deep transition-colors"
+              disabled={submitting}
+              className="inline-flex items-center rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-pop hover:bg-plum-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Submit interest form
+              {submitting ? "Submitting…" : "Submit interest form"}
             </button>
           </form>
         </div>
