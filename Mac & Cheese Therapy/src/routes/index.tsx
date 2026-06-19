@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
-import billiAsset from "@/assets/billi.jpeg.asset.json";
+import billiAsset from "@/assets/billi.jpeg";
 import macLogo from "@/assets/mac_logo.png";
 import { ArrowRight, HelpCircle, Plus, Minus, CheckCircle2, MessageCircle, Utensils } from "lucide-react";
 
@@ -112,7 +112,7 @@ function Index() {
           </div>
           <div className="relative min-h-[320px] md:min-h-full">
             <img
-              src={billiAsset.url}
+              src={billiAsset}
               alt="Billi, speech-language pathologist and founder of Mac & Cheese"
               className="absolute inset-0 w-full h-full object-cover"
             />
